@@ -55,6 +55,8 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = controller.initcatalog()
         controller.cargardatos(catalog)
+        print("Se cargaron los videos")
+        print("Videos cargados: " + str(lt.size(catalog['videos'])))
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 1")
