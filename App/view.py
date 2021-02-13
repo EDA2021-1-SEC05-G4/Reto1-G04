@@ -52,34 +52,40 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        t1 = time.process_time()
         print("Cargando información de los archivos ....")
         catalog = controller.initcatalog()
         controller.cargardatos(catalog)
         print("Se cargaron los videos")
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
+        t2 = time.process_time()
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 1")
         t2 = time.process_time()
-        print("El tiempo de ejecución fue de " + str(t2-t1) + "segundos")
+        print(t1)
+        print(t2)
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 2")
         t2 = time.process_time()
-        print("El tiempo de ejecución fue de " + str(t2-t1) + "segundos")
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 4:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 3")
         t2 = time.process_time()
-        print("El tiempo de ejecución fue de " + str(t2-t1) + "segundos")
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 5:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 4")
         t2 = time.process_time()
-        print("El tiempo de ejecución fue de " + str(t2-t1) + "segundos")
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     else:
         sys.exit(0)
