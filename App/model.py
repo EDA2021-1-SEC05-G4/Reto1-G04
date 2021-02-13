@@ -36,8 +36,12 @@ los mismos.
 """
 
 # Construccion de modelos
+def initcatalog():
+    return{"videos": lt.newList('ARRAY_LIST')}
 
 # Funciones para agregar informacion al catalogo
+def addvideo(catalog, video):
+    lt.addLast(catalog["videos"], video)
 
 # Funciones para creacion de datos
 
