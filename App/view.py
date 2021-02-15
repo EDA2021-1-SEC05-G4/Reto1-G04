@@ -60,14 +60,11 @@ while True:
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
-        print(catalog["videos"])
 
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 1")
         t2 = time.process_time()
-        print(t1)
-        print(t2)
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 3:
