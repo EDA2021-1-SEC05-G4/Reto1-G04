@@ -27,7 +27,9 @@
 
 
 import config as cf
-from DISClib.ADT import list as lt
+import sys
+sys.path.append("DISClib")
+from ADT import list as lt
 assert cf
 
 """

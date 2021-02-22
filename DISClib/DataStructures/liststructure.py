@@ -25,9 +25,11 @@
  """
 
 import config
-from DISClib.Utils import error as error
-from DISClib.DataStructures import arraylist as alt
-from DISClib.DataStructures import singlelinkedlist as slt
+import sys
+sys.path.append("DISClib")
+from Utils import error as error
+from DataStructures import arraylist as alt
+from DataStructures import singlelinkedlist as slt
 assert config
 
 """

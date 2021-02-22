@@ -25,8 +25,10 @@
  """
 
 import config
-from DISClib.Utils import error as error
-from DISClib.DataStructures import liststructure as lt
+import sys
+sys.path.append("DISClib")
+from Utils import error as error
+from DataStructures import liststructure as lt
 assert config
 
 
@@ -73,6 +75,8 @@ def newList(datastructure='SINGLE_LINKED',
         return lst
     except Exception as exp:
         error.reraise(exp, 'TADList->newList: ')
+
+
 
 
 def addFirst(lst, element):
@@ -376,3 +380,6 @@ def iterator(lst):
         return lt.iterator(lst)
     except Exception as exp:
         error.reraise(exp, 'List->Iterator: ')
+
+
+        
