@@ -24,12 +24,9 @@
  * Dario Correal
  *
  """
-import sys
-sys.path.append("DISClib")
-sys.path.append("App")
+
 import config as cf
-import controller 
-from ADT import list as lt
+from DISClib.ADT import list as lt
 assert cf
 
 """
@@ -53,5 +50,3 @@ def sort(lst, cmpfunction):
         lt.exchange(lst, pos1, minimum)  # elemento más pequeño -> elem pos1
         pos1 += 1
     return lst
-
-

@@ -26,9 +26,7 @@
 
 
 import config
-import sys
-sys.path.append("DISClib")
-from Utils import error as error
+from DISClib.Utils import error as error
 import csv
 assert config
 

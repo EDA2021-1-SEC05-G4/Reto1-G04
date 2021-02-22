@@ -22,9 +22,7 @@
 
 import config as cf
 import sys
-sys.path.append("DISClib")
 import controller
-import model
 from DISClib.ADT import list as lt
 assert cf
 import time
@@ -36,18 +34,6 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
-def tipo_de_lista():
-    lista=int(input("ingrese 1 para array_list o ingrese 2 para linked_list: "))
-    centinela=True
-    while centinela:
-        if lista == 1 or lista == 2:
-            break
-        elif lista == 0:
-            break
-        else:
-            print("si desea salir ingrese 0")
-            lista=int(input("ingrese 1 para array_list o ingrese 2 para linked_list"))
-    return lista 
 
 def printMenu():
     print("Bienvenido")
@@ -62,27 +48,22 @@ catalog = None
 """
 Menu principal
 """
-tipo_lista= int(tipo_de_lista())
 while True:
-    
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        if tipo_lista == 1 or tipo_lista == 2:
-            t1 = time.process_time()
-            print("Cargando información de los archivos ....")
-            catalog = controller.initcatalog(tipo_lista)
-            controller.cargardatos(catalog)
-            print("Se cargaron los videos")
-            print("Videos cargados: " + str(lt.size(catalog['videos'])))
-            t2 = time.process_time()
-            print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")       
+        t1 = time.process_time()
+        print("Cargando información de los archivos ....")
+        catalog = controller.initcatalog()
+        controller.cargardatos(catalog)
+        print("Se cargaron los videos")
+        print("Videos cargados: " + str(lt.size(catalog['videos'])))
+        t2 = time.process_time()
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
-        function= input("¿por que metodo de ordanamiento desea hacer?\nselectionsort,insertionsort o shellsort")
-        
-        comparacion=input("si desea hacerlo de mayor a menor seleccione b de lo contrario seleccione a")
-        model.ordenar(function,catalog,comparacion)
+        print("Se ejecutó el requerimiento 1")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
@@ -104,18 +85,6 @@ while True:
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
-    elif int(inputs[0]) == 8:
-        ayuda={}
-        for i in catalog["videos"]["elements"]:
-            dato_interes=i["views"]
-            ayuda[dato_interes]=i
-        
-        
-        
-            
-            
-                
-    
     else:
         sys.exit(0)
 sys.exit(0)

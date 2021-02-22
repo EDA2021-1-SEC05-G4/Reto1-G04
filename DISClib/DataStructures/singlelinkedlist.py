@@ -24,10 +24,8 @@
  """
 
 import config
-import sys
-sys.path.append("DISClib")
-from DataStructures import listnode as node
-from Utils import error as error
+from DISClib.DataStructures import listnode as node
+from DISClib.Utils import error as error
 import csv
 assert config
 
