@@ -36,7 +36,7 @@ assert config
 """
 
 
-def sort(lst, lessfunction):
+def insertion_sort(lst, lessfunction):
     size = lt.size(lst)
     pos1 = 1
     while pos1 <= size:

@@ -30,8 +30,8 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 # Inicialización del Catálogo de libros
-def initcatalog():
-    catalog = model.initcatalog()
+def initcatalog(tipo):
+    catalog = model.initcatalog(tipo)
     return catalog
 
 # Funciones para la carga de datos
@@ -42,5 +42,23 @@ def cargardatos(catalog):
         model.addvideo(catalog, video)
 
 # Funciones de ordenamiento
+def selection_sort(lst):
+    x=model.selection_sort(lst)
+    return x
 
+def insertion_sort(lst, lessfunction):
+    x=model.insertion_sort(lst,lessfunction)
+    return x
+
+def shell_sort(lst, lessfunction):
+    x=model.shell_sort(lst,lessfunction)
+    return x
 # Funciones de consulta sobre el catálogo
+
+def cmpVideosByViews(video1, video2):
+    x=model.cmpVideosByViews(video1,video2)
+    return x
+
+def funcion_lista():
+    x=model.tipo_de_lista()
+    return x

@@ -42,7 +42,7 @@ Sedgewick: 1,5,19,41,109,209,929,2161,...
 """
 
 
-def sort(lst, lessfunction):
+def shell_sort(lst, lessfunction):
     n = lt.size(lst)
     h = 1
     while h < n/3:   # primer gap. La lista se h-ordena con este tamaño

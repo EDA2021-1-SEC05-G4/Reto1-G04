@@ -23,7 +23,9 @@
 import config as cf
 import sys
 import controller
-from DISClib.ADT import list as lt
+import sys
+sys.path.append("DISClib")
+from ADT import list as lt
 assert cf
 import time
 
@@ -54,7 +56,8 @@ while True:
     if int(inputs[0]) == 1:
         t1 = time.process_time()
         print("Cargando información de los archivos ....")
-        catalog = controller.initcatalog()
+        tipo_de_la_lista= controller.funcion_lista()
+        catalog = controller.initcatalog(tipo_de_la_lista)
         controller.cargardatos(catalog)
         print("Se cargaron los videos")
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
@@ -62,7 +65,9 @@ while True:
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 2:
+
         t1 = time.process_time()
+        p= controller.selection_sort(catalog) 
         print("Se ejecutó el requerimiento 1")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")

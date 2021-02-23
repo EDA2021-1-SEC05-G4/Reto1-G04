@@ -36,7 +36,7 @@ assert cf
 """
 
 
-def sort(lst, cmpfunction):
+def selection_sort(lst, cmpfunction):
     size = lt.size(lst)
     pos1 = 1
     while pos1 < size:
