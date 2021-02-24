@@ -47,6 +47,6 @@ def sortVideos(catalog, size, tipo):
 
 # Funciones de consulta sobre el catálogo
 
-def funcion_lista():
-    x=model.tipo_de_lista()
+def funcion_lista(lista):
+    x=model.tipo_de_lista(lista)
     return x

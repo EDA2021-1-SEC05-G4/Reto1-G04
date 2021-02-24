@@ -42,12 +42,7 @@ los mismos.
 
 # Construccion de modelos
 def initcatalog(tipo):
-    k='ARRAY_LIST'
-    if tipo == 1:
-        k='ARRAY_LIST'
-    elif tipo == 2:
-        k='LINKED_LIST'
-    return{"videos": lt.newList(k)}
+    return{"videos": lt.newList(tipo)}
 
 # Funciones para agregar informacion al catalogo
 def addvideo(catalog, video):
@@ -62,18 +57,14 @@ def muestra(lista,pos,nume):
 
 # Funciones de consulta
 
-def tipo_de_lista():
-    lista=int(input("ingrese 1 para array_list o ingrese 2 para linked_list: "))
-    centinela=True
-    while centinela:
-        if lista == 1 or lista == 2:
-            break
-        elif lista == 0:
-            break
-        else:
-            print("si desea salir ingrese 0")
-            lista=int(input("ingrese 1 para array_list o ingrese 2 para linked_list"))
-    return lista 
+def tipo_de_lista(lista):
+    if lista == 1:
+        k='ARRAY_LIST'
+    elif lista == 2:
+        k='LINKED_LIST'
+    else:
+        k = "Ninguno"
+    return k
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def cmpfunction(video1, video2):

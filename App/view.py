@@ -57,14 +57,14 @@ while True:
     if int(inputs[0]) == 1:
         t1 = time.process_time()
         print("Cargando información de los archivos ....")
-        tipo_de_la_lista= controller.funcion_lista()
+        consulta= int(input("Ingrese 1 para ARRAY_LIST o ingrese 2 para LINKED_LIST: "))
+        tipo_de_la_lista = controller.funcion_lista(consulta)
         catalog = controller.initcatalog(tipo_de_la_lista)
         controller.cargardatos(catalog)
-        print(lt.firstElement(catalog["videos"]))
         print("Se cargaron los videos")
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
         t2 = time.process_time()
-        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+        print("El tiempo de ejecución fue de " + str((t2-t1)*1000) + " milisegundos")
 
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
@@ -81,7 +81,7 @@ while True:
         controller.sortVideos(catalog, tamanio, tipo)
         print("Se ordenó el catalogo de acuerdo a la especificación")
         t2 = time.process_time()
-        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+        print("El tiempo de ejecución fue de " + str((t2-t1)*1000) + " milisegundos")
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
