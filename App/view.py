@@ -40,10 +40,11 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Video por categoria y pais")
-    print("3- Video tendencia por pais")
-    print("4- Video tendencia por categoria")
-    print("5- Videos con mas likes")
+    print("2- Seleccionar tipo de ordenamiento para el catalogo")
+    print("3- Video por categoria y pais")
+    print("4- Video tendencia por pais")
+    print("5- Video tendencia por categoria")
+    print("6- Videos con mas likes")
 
 catalog = None
 
@@ -59,32 +60,48 @@ while True:
         tipo_de_la_lista= controller.funcion_lista()
         catalog = controller.initcatalog(tipo_de_la_lista)
         controller.cargardatos(catalog)
+        print(lt.firstElement(catalog["videos"]))
         print("Se cargaron los videos")
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 2:
-
         t1 = time.process_time()
-        p= controller.selection_sort(catalog) 
-        print("Se ejecutó el requerimiento 1")
+        print("Tipos de ordenamientos iterativos")
+        print("1-Selection Sort")
+        print("2-Insertion Sort")
+        print("3-Shell Sort")
+        tipo = int(input("Seleccione el metodo de ordenamiento que desea ejecutar para el catalogo"))
+        size = int(input("Ingrese el tamaño de la muestra que desea ordenar(debe ser menor a 1000): "))
+        if size <= 1000:
+            tamanio = size
+        else:
+            tamanio = lt.size(catalog)
+        controller.sortVideos(catalog, tamanio, tipo)
+        print("Se ordenó el catalogo de acuerdo a la especificación")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
-        print("Se ejecutó el requerimiento 2")
+        print("Se ejecutó el requerimiento 1")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 4:
         t1 = time.process_time()
-        print("Se ejecutó el requerimiento 3")
+        print("Se ejecutó el requerimiento 2")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 5:
+        t1 = time.process_time()
+        print("Se ejecutó el requerimiento 3")
+        t2 = time.process_time()
+        print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+
+    elif int(inputs[0]) == 6:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 4")
         t2 = time.process_time()

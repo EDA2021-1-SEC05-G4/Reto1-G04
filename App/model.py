@@ -30,6 +30,9 @@ import sys
 sys.path.append("DISClib")
 from ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as it
+from DISClib.Algorithms.Sorting import selectsort as se
+import time
 assert cf
 
 """
@@ -43,7 +46,7 @@ def initcatalog(tipo):
     if tipo == 1:
         k='ARRAY_LIST'
     elif tipo == 2:
-        k='ARRAY_LIST'
+        k='LINKED_LIST'
     return{"videos": lt.newList(k)}
 
 # Funciones para agregar informacion al catalogo
@@ -56,8 +59,6 @@ def muestra(lista,pos,nume):
     u=lt.subList(lista,pos,nume)
     return u
 
-    
-    
 
 # Funciones de consulta
 
@@ -77,51 +78,21 @@ def tipo_de_lista():
 # Funciones utilizadas para comparar elementos dentro de una lista
 def cmpfunction(video1, video2):
     x=False
-    if video1 < video2:
+    if video1["views"] > video2["views"]:
         x=True
     return x
 
-
 # Funciones de ordenamiento
-def selection_sort(lst):
-    
-    size = lt.size(lst)
-    pos1 = 1
-    while pos1 < size:
-        minimum = pos1    # minimun tiene el menor elemento
-        pos2 = pos1 + 1
-        while (pos2 <= size):
-            if (cmpfunction(lt.getElement(lst["videos"], pos2),
-               (lt.getElement(lst["videos"], minimum)))):
-                minimum = pos2  # minimum = posición elemento más pequeño
-            pos2 += 1
-        lt.exchange(lst, pos1, minimum)  # elemento más pequeño -> elem pos1
-        pos1 += 1
-    return lst
-
-def insertion_sort(lst, lessfunction):
-    size = lt.size(lst)
-    pos1 = 1
-    while pos1 <= size:
-        pos2 = pos1
-        while (pos2 > 1) and (lessfunction(
-               lt.getElement(lst, pos2), lt.getElement(lst, pos2-1))):
-            lt.exchange(lst, pos2, pos2-1)
-            pos2 -= 1
-        pos1 += 1
-    return lst
-def shell_sort(lst, lessfunction):
-    n = lt.size(lst)
-    h = 1
-    while h < n/3:   # primer gap. La lista se h-ordena con este tamaño
-        h = 3*h + 1
-    while (h >= 1):
-        for i in range(h, n):
-            j = i
-            while (j >= h) and lessfunction(
-                                lt.getElement(lst, j+1),
-                                lt.getElement(lst, j-h+1)):
-                lt.exchange(lst, j+1, j-h+1)
-                j -= h
-        h //= 3    # h se decrementa en un tercio
-    return lst
+def sortVideos(catalog, size, tipo):
+    sub_list = lt.subList(catalog['videos'], 0, size)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    if tipo == 1:
+        sorted_list = se.selection_sort(sub_list, cmpfunction)
+    elif tipo == 2:
+        sorted_list = it.insertion_sort(sub_list, cmpfunction)       
+    elif tipo == 3:
+        sorted_list = sa.shell_sort(sub_list, cmpfunction)     
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
