@@ -74,11 +74,7 @@ while True:
         print("3-Shell Sort")
         tipo = int(input("Seleccione el metodo de ordenamiento que desea ejecutar para el catalogo"))
         size = int(input("Ingrese el tamaño de la muestra que desea ordenar(debe ser menor a 1000): "))
-        if size <= 1000:
-            tamanio = size
-        else:
-            tamanio = lt.size(catalog)
-        controller.sortVideos(catalog, tamanio, tipo)
+        controller.sortVideos(catalog, size, tipo)
         print("Se ordenó el catalogo de acuerdo a la especificación")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str((t2-t1)*1000) + " milisegundos")
