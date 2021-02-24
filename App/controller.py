@@ -36,7 +36,7 @@ def initcatalog(tipo):
 
 # Funciones para la carga de datos
 def cargardatos(catalog):
-    vfile = cf.data_dir + 'videos/videos-small.csv'
+    vfile = cf.data_dir + 'videos/videos-large.csv'
     input_file = csv.DictReader(open(vfile, encoding='utf-8'))
     for video in input_file:
         model.addvideo(catalog, video)
