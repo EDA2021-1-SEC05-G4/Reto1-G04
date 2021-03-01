@@ -68,7 +68,7 @@ while True:
 
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
-        print("Tipos de ordenamientos iterativos")
+        print("Tipos de ordenamientos")
         print("1-Selection Sort")
         print("2-Insertion Sort")
         print("3-Shell Sort")
