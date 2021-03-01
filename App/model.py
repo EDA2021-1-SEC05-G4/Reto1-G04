@@ -32,8 +32,8 @@ from ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import insertionsort as it
 from DISClib.Algorithms.Sorting import selectsort as se
-from DISClib.Algorithms.Sorting import quicksort as qu
 from DISClib.Algorithms.Sorting import mergesort as me
+from DISClib.Algorithms.Sorting import quicksort as qu
 import time
 assert cf
 

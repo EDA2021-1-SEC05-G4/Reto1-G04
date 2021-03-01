@@ -84,7 +84,7 @@ while True:
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 1")
-        t2 = tim e.process_time()
+        t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 4:

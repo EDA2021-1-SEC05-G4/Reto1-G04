@@ -36,7 +36,7 @@ assert cf
 """
 
 
-def sort(lst, lessfunction):
+def mergesort(lst, lessfunction):
     size = lt.size(lst)
     if size > 1:
         mid = (size // 2)
@@ -46,8 +46,8 @@ def sort(lst, lessfunction):
         rightlist = lt.subList(lst, mid+1, size - mid)
 
         """se hace el llamado recursivo con la lista izquierda y derecha"""
-        sort(leftlist, lessfunction)
-        sort(rightlist, lessfunction)
+        mergesort(leftlist, lessfunction)
+        mergesort(rightlist, lessfunction)
 
         """i recorre la lista izquierda, j la derecha y k la lista original"""
         i = j = k = 1
