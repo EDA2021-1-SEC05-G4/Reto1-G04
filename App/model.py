@@ -32,6 +32,8 @@ from ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import insertionsort as it
 from DISClib.Algorithms.Sorting import selectsort as se
+from DISClib.Algorithms.Sorting import quicksort as qu
+from DISClib.Algorithms.Sorting import mergesort as me
 import time
 assert cf
 
@@ -84,6 +86,10 @@ def sortVideos(catalog, size, tipo):
         sorted_list = it.insertion_sort(sub_list, cmpfunction)       
     elif tipo == 3:
         sorted_list = sa.shell_sort(sub_list, cmpfunction)     
+    elif tipo == 4:
+        sorted_list = qu.quicksort(sub_list, cmpfunction)
+    elif tipo == 5:
+        sorted_list = me.mergesort(sub_list, cmpfunction)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list

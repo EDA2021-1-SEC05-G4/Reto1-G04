@@ -72,6 +72,8 @@ while True:
         print("1-Selection Sort")
         print("2-Insertion Sort")
         print("3-Shell Sort")
+        print("4-quick sort")
+        print("5-merge sort")
         tipo = int(input("Seleccione el metodo de ordenamiento que desea ejecutar para el catalogo: "))
         size = int(input("Ingrese el tamaño de la muestra que desea ordenar: "))
         controller.sortVideos(catalog, size, tipo)
@@ -82,7 +84,7 @@ while True:
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
         print("Se ejecutó el requerimiento 1")
-        t2 = time.process_time()
+        t2 = tim e.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 4:
