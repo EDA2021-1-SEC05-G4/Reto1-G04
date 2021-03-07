@@ -65,6 +65,7 @@ while True:
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str((t2-t1)*1000) + " milisegundos")
+        print(lt.firstElement(catalog["videos"]))
 
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
@@ -83,6 +84,14 @@ while True:
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
+        categoria = input("Ingrese la categoria que desea consultar: ")
+        pais = input("Ingrese el pais que desea consultar: ")
+        numero = int(input("Ingrese el numero de videos que desea visualizar: "))
+        lista_categorias = controller.init_lista_categorias()
+        controller.cargar_categorias(lista_categorias)
+        print(lista_categorias)
+        videos = controller.videos_categoria_pais(lista_categorias, catalog ,categoria, pais, numero)
+        print(videos)
         print("Se ejecutó el requerimiento 1")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")

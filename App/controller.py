@@ -29,10 +29,14 @@ import csv
 El controlador se encarga de mediar entre la vista y el modelo.
 """
 
-# Inicialización del Catálogo de libros
+# Inicialización del Catálogo de libros y de categorias
 def initcatalog(tipo):
     catalog = model.initcatalog(tipo)
     return catalog
+
+def init_lista_categorias():
+    lista = model.init_lista_categorias()
+    return lista
 
 # Funciones para la carga de datos
 def cargardatos(catalog):
@@ -41,12 +45,21 @@ def cargardatos(catalog):
     for video in input_file:
         model.addvideo(catalog, video)
 
+def cargar_categorias(lista):
+    cfile = cf.data_dir + 'videos/category-id.csv'
+    input_file = csv.DictReader(open(cfile, encoding='utf-8'))
+    for categoria in input_file:
+        model.addcategory(lista, categoria)
+
 # Funciones de ordenamiento
 def sortVideos(catalog, size, tipo):
     return model.sortVideos(catalog, size, tipo)
 
 # Funciones de consulta sobre el catálogo
-
 def funcion_lista(lista):
     x=model.tipo_de_lista(lista)
     return x
+
+# Funcion requerimiento 1
+def videos_categoria_pais(lista, catalog, categoria, pais, numero):
+    return model.videos_categoria_pais(lista, catalog, categoria, pais, numero)

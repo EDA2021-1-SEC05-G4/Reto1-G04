@@ -46,19 +46,22 @@ los mismos.
 def initcatalog(tipo):
     return{"videos": lt.newList(tipo)}
 
+def init_lista_categorias():
+    return {"categorias": lt.newList('ARRAY_LIST')}
+
 # Funciones para agregar informacion al catalogo
 def addvideo(catalog, video):
     lt.addLast(catalog["videos"], video)
 
-# Funciones para creacion de datos
+def addcategory(lista, categoria):
+    lt.addLast(lista["categorias"], categoria)
 
+# Funciones para creacion de datos
 def muestra(lista,pos,nume):
     u=lt.subList(lista,pos,nume)
     return u
 
-
 # Funciones de consulta
-
 def tipo_de_lista(lista):
     if lista == 1:
         k='ARRAY_LIST'
@@ -77,7 +80,10 @@ def cmpfunction(video1, video2):
 
 # Funciones de ordenamiento
 def sortVideos(catalog, size, tipo):
-    sub_list = lt.subList(catalog['videos'], 0, size)
+    if size != None:
+        sub_list = lt.subList(catalog['videos'], 0, size)
+    else:
+        sub_list = catalog
     sub_list = sub_list.copy()
     start_time = time.process_time()
     if tipo == 1:
@@ -93,3 +99,25 @@ def sortVideos(catalog, size, tipo):
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list
+
+# Funciones requerimiento 1
+def categorias(lista_categoria, categoria):
+    for cat in lista_categoria["categorias"]["elements"]:
+        if cat["name"] == categoria:
+            return cat["id"]
+
+def videos_categoria_pais(lista, catalog, categoria, pais, numero):
+    categoria = categorias(lista, categoria)
+    quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled","video_error_or_removed","description"]
+    lista_videos = []
+    for video in catalog["videos"]["elements"]:
+        for llave in quitar_llaves:
+            del video[llave]
+        if video["category_id"] == categoria:
+            if video["country"] == pais:
+                lista_videos.append(video)
+    lista_videos = lista_videos[:numero]
+    for video in lista_videos:
+        del video["category_id"]
+        del video["country"]
+    return lista_videos
