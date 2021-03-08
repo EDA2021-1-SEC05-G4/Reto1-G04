@@ -82,3 +82,5 @@ def videos_categoria_pais(lista, catalog, categoria, pais, numero):
 
 def video_tendencia_pais(catalog, pais):
     return model.video_tendencia_pais(catalog, pais)
+def video_trending(lista,categoria,tipo):
+    return model.jeje(lista,categoria,tipo)
