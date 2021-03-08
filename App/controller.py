@@ -47,9 +47,25 @@ def cargardatos(catalog):
 
 def cargar_categorias(lista):
     cfile = cf.data_dir + 'videos/category-id.csv'
-    input_file = csv.DictReader(open(cfile, encoding='utf-8'))
-    for categoria in input_file:
+    archivo = open(cfile, "r", encoding="utf-8")
+    lista_titulos = ["id", "name"]
+    print(lista_titulos)
+    
+    linea = archivo.readline()
+    linea = archivo.readline()
+    while len(linea) > 0:
+        categoria = {}
+        datos = linea.strip().split(" ")
+        categoria[lista_titulos[0]] = datos[0]
+        nombre = ""
+        e = 1
+        while e < len(datos):
+            nombre = nombre + " " + datos[e]
+            e+=1
+        categoria[lista_titulos[1]] = nombre
+        linea = archivo.readline()
         model.addcategory(lista, categoria)
+    archivo.close()
 
 # Funciones de ordenamiento
 def sortVideos(catalog, size, tipo):

@@ -109,7 +109,7 @@ def categorias(lista_categoria, categoria):
 
 def videos_categoria_pais(lista, catalog, categoria, pais, numero):
     catalog = catalog.copy()
-    categoria = categorias(lista, categoria)
+    categoria = categorias(lista, " " + categoria)
     quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
                     "video_error_or_removed","description"]
     lista_videos = []
@@ -121,7 +121,7 @@ def videos_categoria_pais(lista, catalog, categoria, pais, numero):
     #sortVideos(catalog, "None", 4)
 
     for video in catalog["videos"]["elements"]:   
-        if video["category_id"] == categoria:
+        if (video["category_id"] + "\t") == categoria:
             if video["country"] == pais:
                 lista_videos.append(video)
 
