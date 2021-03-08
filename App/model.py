@@ -109,7 +109,7 @@ def categorias(lista_categoria, categoria):
 
 def videos_categoria_pais(lista, catalog, categoria, pais, numero):
     catalog = catalog.copy()
-    categoria = categorias(lista, " " + categoria)
+    categoria = categorias(lista, (" " + categoria))
     quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
                     "video_error_or_removed","description"]
     lista_videos = []
@@ -118,14 +118,13 @@ def videos_categoria_pais(lista, catalog, categoria, pais, numero):
         for llave in quitar_llaves:
             del video[llave]
 
-    #sortVideos(catalog, "None", 4)
+    sortVideos(catalog["videos"], "None", 4)
 
     for video in catalog["videos"]["elements"]:   
         if (video["category_id"] + "\t") == categoria:
             if video["country"] == pais:
                 lista_videos.append(video)
     lista_videos = lista_videos[:numero] 
-    print(lista_videos)
     for video in lista_videos:
         del video["category_id"]
         del video["country"]
@@ -141,25 +140,27 @@ def video_tendencia_pais(catalog, pais):
         for llave in quitar_llaves:
             del video[llave]
 
-    #sortVideos(catalog, "None", 4)
+    sortVideos(catalog["videos"], "None", 4)
 
-    lista_videos_pais = []
+    videos_pais = []
     for video in catalog["videos"]["elements"]:   
         if video["country"] == pais:
-            if video not in lista_videos_pais:
-
-                lista_videos_pais.append(video)
-                dias_tendencia_videos["title"] = 1
+            if video not in videos_pais:
+                video["dias"] = 1
+                videos_pais.append(video)
             else:
-                dias_tendencia_videos["title"] = dias_tendencia_videos["title"] + 1
+                video["dias"] = video["dias"] + 1
 
-   # mas_dias = 1
-    #video = "None"
-    #for video in dias_tendencia_videos:
-        #if dias_tendencia_videos[video] > mas_dias:
+    mas_dias = 1
+    video_tendencia = videos_pais[0]
 
-    return dias_tendencia_videos
-  
+    for video in videos_pais:
+        if video["dias"] > mas_dias:
+            mas_dias = video["dias"]
+            video_tendencia = video
+
+    return video_tendencia
+
 def jeje(lista, categoria,tipo):
     if tipo == 1:
         for i in lista["videos"]["elements"]:
