@@ -116,8 +116,22 @@ def videos_categoria_pais(lista, catalog, categoria, pais, numero):
         if video["category_id"] == categoria:
             if video["country"] == pais:
                 lista_videos.append(video)
-    lista_videos = lista_videos[:numero]
+    lista_videos = lista_videos[:numero] 
+    print(lista_videos)
     for video in lista_videos:
         del video["category_id"]
         del video["country"]
     return lista_videos
+
+  
+def jeje(lista, categoria,tipo):
+    if tipo == 1:
+        for i in lista["videos"]["elements"]:
+            print(i)
+            input("seguro")
+    elif tipo == 2:
+        for i in lista["videos"]["elements"]:
+            print(i)
+            input("seguro")
+
+        

@@ -84,8 +84,8 @@ while True:
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
-        categoria = input("Ingrese la categoria que desea consultar: ")
-        pais = input("Ingrese el pais que desea consultar: ")
+        categoria = input("Ingrese la categoria que desea consultar: ").lower
+        pais = input("Ingrese el pais que desea consultar: ").lower
         numero = int(input("Ingrese el numero de videos que desea visualizar: "))
         lista_categorias = controller.init_lista_categorias()
         controller.cargar_categorias(lista_categorias)
@@ -98,6 +98,8 @@ while True:
 
     elif int(inputs[0]) == 4:
         t1 = time.process_time()
+        categoria="aun nada"
+        controller.video_trending(catalog,categoria,consulta)
         print("Se ejecutó el requerimiento 2")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")

@@ -63,3 +63,6 @@ def funcion_lista(lista):
 # Funcion requerimiento 1
 def videos_categoria_pais(lista, catalog, categoria, pais, numero):
     return model.videos_categoria_pais(lista, catalog, categoria, pais, numero)
+
+def video_trending(lista,categoria,tipo):
+    return model.jeje(lista,categoria,tipo)
