@@ -89,7 +89,6 @@ while True:
         numero = int(input("Ingrese el numero de videos que desea visualizar: "))
         lista_categorias = controller.init_lista_categorias()
         controller.cargar_categorias(lista_categorias)
-        print(lista_categorias)
         videos = controller.videos_categoria_pais(lista_categorias, catalog ,categoria, pais, numero)
         print(videos)
         print("Se ejecutó el requerimiento 1")
