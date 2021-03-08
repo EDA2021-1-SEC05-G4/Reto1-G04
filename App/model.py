@@ -73,14 +73,15 @@ def tipo_de_lista(lista):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def cmpfunction(video1, video2):
-    x=False
-    if video1["views"] > video2["views"]:
+    if int(video1["views"]) > int(video2["views"]):
         x=True
+    else:
+        x=False
     return x
 
 # Funciones de ordenamiento
 def sortVideos(catalog, size, tipo):
-    if size != None:
+    if size != "None":
         sub_list = lt.subList(catalog['videos'], 0, size)
     else:
         sub_list = catalog
@@ -107,17 +108,55 @@ def categorias(lista_categoria, categoria):
             return cat["id"]
 
 def videos_categoria_pais(lista, catalog, categoria, pais, numero):
+    catalog = catalog.copy()
     categoria = categorias(lista, categoria)
-    quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled","video_error_or_removed","description"]
+    quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
+                    "video_error_or_removed","description"]
     lista_videos = []
+
     for video in catalog["videos"]["elements"]:
         for llave in quitar_llaves:
             del video[llave]
+
+    #sortVideos(catalog, "None", 4)
+
+    for video in catalog["videos"]["elements"]:   
         if video["category_id"] == categoria:
             if video["country"] == pais:
                 lista_videos.append(video)
+
     lista_videos = lista_videos[:numero]
+
     for video in lista_videos:
         del video["category_id"]
         del video["country"]
     return lista_videos
+
+def video_tendencia_pais(catalog, pais):
+    catalog = catalog.copy()
+    quitar_llaves = ["category_id","publish_time","tags","views","likes","dislikes",\
+                    "comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
+                    "video_error_or_removed","description"]
+
+    for video in catalog["videos"]["elements"]:
+        for llave in quitar_llaves:
+            del video[llave]
+
+    #sortVideos(catalog, "None", 4)
+
+    lista_videos_pais = []
+    for video in catalog["videos"]["elements"]:   
+        if video["country"] == pais:
+            if video not in lista_videos_pais:
+
+                lista_videos_pais.append(video)
+                dias_tendencia_videos["title"] = 1
+            else:
+                dias_tendencia_videos["title"] = dias_tendencia_videos["title"] + 1
+
+   # mas_dias = 1
+    #video = "None"
+    #for video in dias_tendencia_videos:
+        #if dias_tendencia_videos[video] > mas_dias:
+
+    return dias_tendencia_videos
