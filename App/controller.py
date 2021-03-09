@@ -80,7 +80,10 @@ def funcion_lista(lista):
 def videos_categoria_pais(lista, catalog, categoria, pais, numero):
     return model.videos_categoria_pais(lista, catalog, categoria, pais, numero)
 
-def video_tendencia_pais(catalog, pais):
-    return model.video_tendencia_pais(catalog, pais)
-def video_trending(lista,categoria,tipo):
-    return model.jeje(lista,categoria,tipo)
+#funcion requerimiento 2
+def video_trending(lista,pais):
+    return model.video_trending_countrie(lista,pais)
+
+#funcion requerimiento 3
+def video_categoria(lista,categoria,lista_categoria):
+    return model.video_trending_categorie(lista,categoria,lista_categoria)

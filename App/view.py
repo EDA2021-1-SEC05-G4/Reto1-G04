@@ -41,9 +41,9 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Seleccionar tipo de ordenamiento para el catalogo")
-    print("3- Video por categoria y pais")
+    print("3- Video tendencia por categoria")
     print("4- Video tendencia por pais")
-    print("5- Video tendencia por categoria")
+    print("5- Video por categoria y pais")
     print("6- Videos con mas likes")
 
 catalog = None
@@ -84,26 +84,24 @@ while True:
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
-        categoria = input("Ingrese la categoria que desea consultar: ").lower
-        pais = input("Ingrese el pais que desea consultar: ").lower
-        numero = int(input("Ingrese el numero de videos que desea visualizar: "))
         lista_categorias = controller.init_lista_categorias()
         controller.cargar_categorias(lista_categorias)
-        videos = controller.videos_categoria_pais(lista_categorias, catalog ,categoria, pais, numero)
-        print(videos)
-        print("Se ejecutó el requerimiento 1")
+        categoria = input("Ingrese la categoria que desea consultar: ")
+        final = controller.video_categoria(catalog,categoria,lista_categorias)
+        print("Se ejecutó el requerimiento 3")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+
 
     elif int(inputs[0]) == 4:
         t1 = time.process_time()
         pais = input("Ingrese el pais que desea consultar: ")
-        video = controller.video_tendencia_pais(catalog, pais)
-        categoria="aun nada"
-        controller.video_trending(catalog,categoria,consulta)
+        imprimir=controller.video_trending(catalog,pais)
         print("Se ejecutó el requerimiento 2")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
+        print("el titulo del video que más días ha sido trending para {0} fue {1} y su su canal fue {2} con el total de {3} dias ".format(pais,imprimir[0],imprimir[1],imprimir[3]))
+
 
     elif int(inputs[0]) == 5:
         t1 = time.process_time()

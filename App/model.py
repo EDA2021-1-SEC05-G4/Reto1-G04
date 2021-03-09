@@ -107,67 +107,63 @@ def categorias(lista_categoria, categoria):
         if cat["name"] == categoria:
             return cat["id"]
 
-def videos_categoria_pais(lista, catalog, categoria, pais, numero):
-    catalog = catalog.copy()
-    categoria = categorias(lista, " " + categoria)
-    quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
-                    "video_error_or_removed","description"]
-    lista_videos = []
+def saber_categoria(lista,categoria):
+    j=(lista["categorias"]["elements"])
+    for i in j:
+        if i["id"].replace("\t","") == categoria:
+            p=i["name"].replace(" ","")
+            break
+    return p
 
-    for video in catalog["videos"]["elements"]:
-        for llave in quitar_llaves:
-            del video[llave]
-
-    #sortVideos(catalog, "None", 4)
-
-    for video in catalog["videos"]["elements"]:   
-        if (video["category_id"] + "\t") == categoria:
-            if video["country"] == pais:
-                lista_videos.append(video)
-    lista_videos = lista_videos[:numero] 
-    print(lista_videos)
-    for video in lista_videos:
-        del video["category_id"]
-        del video["country"]
-    return lista_videos
-
-def video_tendencia_pais(catalog, pais):
-    catalog = catalog.copy()
-    quitar_llaves = ["category_id","publish_time","tags","views","likes","dislikes",\
-                    "comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
-                    "video_error_or_removed","description"]
-
-    for video in catalog["videos"]["elements"]:
-        for llave in quitar_llaves:
-            del video[llave]
-
-    #sortVideos(catalog, "None", 4)
-
-    lista_videos_pais = []
-    for video in catalog["videos"]["elements"]:   
-        if video["country"] == pais:
-            if video not in lista_videos_pais:
-
-                lista_videos_pais.append(video)
-                dias_tendencia_videos["title"] = 1
-            else:
-                dias_tendencia_videos["title"] = dias_tendencia_videos["title"] + 1
-
-   # mas_dias = 1
-    #video = "None"
-    #for video in dias_tendencia_videos:
-        #if dias_tendencia_videos[video] > mas_dias:
-
-    return dias_tendencia_videos
+def video_trending_categorie(lista, categoria,lista_categoria):
+    categoria_p={}
+    categoria_p1={}
+    for i in range(lt.size(lista["videos"])):
+        objeto=lt.getElement(lista["videos"],i)
+        for o in objeto:
+            categoria_video = objeto["category_id"]
+            nombre=saber_categoria(lista_categoria,categoria_video).lower()
+            if nombre == categoria.lower():
+                for u in range(lt.size(lista["videos"])):
+                    objeto=lt.getElement(lista["videos"],u)
+                    if nombre in categoria_p:
+                        categoria_p[nombre]+=1
+                    else:
+                        categoria_p[nombre]=1
+                        categoria_p1[nombre]=objeto
+                    input(categoria_p1)
+    
   
-def jeje(lista, categoria,tipo):
-    if tipo == 1:
-        for i in lista["videos"]["elements"]:
-            print(i)
-            input("seguro")
-    elif tipo == 2:
-        for i in lista["videos"]["elements"]:
-            print(i)
-            input("seguro")
+def video_trending_countrie(lista, pais):
+    videos={}
+    videos1={}
+    mayor=0
+    entregar=""
+    respesta=""
+    for i in range(lt.size(lista["videos"])):
+        objeto=lt.getElement(lista["videos"],i)
+        f=objeto["country"].lower()
+        if f == pais.lower():
+            
+            if objeto["video_id"] in videos:
+                videos[objeto["video_id"]]+=1
+            else:
+                videos[objeto["video_id"]]=1
+                videos1[objeto["video_id"]]=objeto
+                
+    for o in videos:
+        if videos[o] > mayor:
+            mayor = videos[o]
+            respesta=(o,videos[o])
+    for h in videos1:
+        if respesta[0] == h:
+            entregar=videos1[h]
+            break
+
+    g=(entregar["title"],entregar["channel_title"],entregar["country"],mayor)
+
+    return g
+
+        
 
         
