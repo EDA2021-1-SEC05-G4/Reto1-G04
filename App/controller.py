@@ -50,7 +50,7 @@ def cargar_categorias(lista):
     archivo = open(cfile, "r", encoding="utf-8")
     lista_titulos = ["id", "name"]
     print(lista_titulos)
-    
+
     linea = archivo.readline()
     linea = archivo.readline()
     while len(linea) > 0:
