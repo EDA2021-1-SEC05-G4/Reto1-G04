@@ -88,6 +88,7 @@ while True:
         controller.cargar_categorias(lista_categorias)
         categoria = input("Ingrese la categoria que desea consultar: ")
         final = controller.video_categoria(catalog,categoria,lista_categorias)
+        print("el titulo del video  que mas dias ha sido trending en la categoria {0} (id de la categoria es {1}) fue {2} y su canal fue {3} con el total de {4} dias".format(final[3],final[2],final[0],final[1],final[4]))
         print("Se ejecutó el requerimiento 3")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")

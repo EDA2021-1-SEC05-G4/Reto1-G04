@@ -116,23 +116,36 @@ def saber_categoria(lista,categoria):
     return p
 
 def video_trending_categorie(lista, categoria,lista_categoria):
-    categoria_p={}
+    categoria_veces={}
     categoria_p1={}
+    mayor=0
+    respuesta =""
     for i in range(lt.size(lista["videos"])):
         objeto=lt.getElement(lista["videos"],i)
-        for o in objeto:
-            categoria_video = objeto["category_id"]
-            nombre=saber_categoria(lista_categoria,categoria_video).lower()
-            if nombre == categoria.lower():
-                for u in range(lt.size(lista["videos"])):
-                    objeto=lt.getElement(lista["videos"],u)
-                    if nombre in categoria_p:
-                        categoria_p[nombre]+=1
-                    else:
-                        categoria_p[nombre]=1
-                        categoria_p1[nombre]=objeto
-                    input(categoria_p1)
-    
+        categoria_video = objeto["category_id"]
+        nombre=saber_categoria(lista_categoria,categoria_video).lower()
+        if nombre == categoria.lower():
+            if objeto["video_id"] in categoria_veces:
+                categoria_veces[objeto["video_id"]]+=1
+            else:
+                categoria_veces[objeto["video_id"]]=1
+                categoria_p1[objeto["video_id"]]=objeto
+    for o in categoria_veces:
+        if categoria_veces[o] > mayor:
+            mayor=categoria_veces[o]
+            respuesta=(o,categoria_veces[o])
+    for h in categoria_p1:
+        if respuesta[0] == h:
+            entregar=categoria_p1[h]
+            break
+
+    g=(entregar["title"],entregar["channel_title"],entregar["category_id"],nombre,mayor)
+
+    return g
+
+            
+        
+        
   
 def video_trending_countrie(lista, pais):
     videos={}
