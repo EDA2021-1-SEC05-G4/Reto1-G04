@@ -60,13 +60,14 @@ while True:
         consulta= int(input("Ingrese 1 para ARRAY_LIST o ingrese 2 para LINKED_LIST: "))
         tipo_de_la_lista = controller.funcion_lista(consulta)
         catalog = controller.initcatalog(tipo_de_la_lista)
-        controller.cargardatos(catalog)
+        controller.cargarinfocatalogo(catalog)
         print("Se cargaron los videos")
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str((t2-t1)*1000) + " milisegundos")
-        #print(lt.firstElement(catalog["videos"]))
-
+        print(lt.firstElement(catalog["videos"]))
+        print(lt.firstElement(catalog["categorias"]))
+        print(lt.firstElement(catalog["tags"]))
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
         print("Tipos de ordenamientos")
@@ -84,8 +85,6 @@ while True:
 
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
-        lista_categorias = controller.init_lista_categorias()
-        controller.cargar_categorias(lista_categorias)
         categoria = input("Ingrese la categoria que desea consultar: ")
         final = controller.video_categoria(catalog,categoria,lista_categorias)
         print("el titulo del video  que mas dias ha sido trending en la categoria {0} (id de la categoria es {1}) fue {2} y su canal fue {3} con el total de {4} dias".format(final[3],final[2],final[0],final[1],final[4]))

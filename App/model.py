@@ -44,17 +44,20 @@ los mismos.
 
 # Construccion de modelos
 def initcatalog(tipo):
-    return{"videos": lt.newList(tipo)}
-
-def init_lista_categorias():
-    return {"categorias": lt.newList('ARRAY_LIST')}
+    a = {"videos": lt.newList(tipo),
+           "categorias": lt.newList(tipo),
+           "tags": lt.newList(tipo)}
+    return a
 
 # Funciones para agregar informacion al catalogo
 def addvideo(catalog, video):
     lt.addLast(catalog["videos"], video)
 
-def addcategory(lista, categoria):
-    lt.addLast(lista["categorias"], categoria)
+def addcategory(catalog, categoria):
+    lt.addLast(catalog["categorias"], categoria)
+
+def addtag(catalog, video):
+    lt.addLast(catalog["tags"], video)
 
 # Funciones para creacion de datos
 def muestra(lista,pos,nume):
@@ -143,10 +146,6 @@ def video_trending_categorie(lista, categoria,lista_categoria):
 
     return g
 
-            
-        
-        
-  
 def video_trending_countrie(lista, pais):
     videos={}
     videos1={}
