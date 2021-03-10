@@ -40,7 +40,7 @@ def cargarinfocatalogo(catalog):
     cargarcategorias(catalog)
 
 def cargardatos(catalog):
-    vfile = cf.data_dir + 'videos/videos-large.csv'
+    vfile = cf.data_dir + 'videos/videos-30pct.csv'
     input_file = csv.DictReader(open(vfile, encoding='utf-8'))
     for video in input_file:
         tags = video["tags"].split("|")
@@ -76,4 +76,4 @@ def video_categoria(catalog,categoria):
 
 #funcion requerimiento 4
 def videos_likes(catalog, pais, tag, numero):
-    return model.videos_likes(catalog, pais, tag, numero)
+    return model.videos_likes2(catalog, pais, tag, numero)
