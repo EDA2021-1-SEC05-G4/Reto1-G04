@@ -86,8 +86,9 @@ while True:
     elif int(inputs[0]) == 3:
         t1 = time.process_time()
         categoria = input("Ingrese la categoria que desea consultar: ")
-        final = controller.video_categoria(catalog,categoria,lista_categorias)
-        print("el titulo del video  que mas dias ha sido trending en la categoria {0} (id de la categoria es {1}) fue {2} y su canal fue {3} con el total de {4} dias".format(final[3],final[2],final[0],final[1],final[4]))
+        final = controller.video_categoria(catalog,categoria)
+        print(final)
+        #print("El titulo del video  que mas dias ha sido trending en la categoria {0} (id de la categoria es {1}) fue {2} y su canal fue {3} con el total de {4} dias".format(final[3],final[2],final[0],final[1],final[4]))
         print("Se ejecutó el requerimiento 3")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
@@ -96,21 +97,30 @@ while True:
     elif int(inputs[0]) == 4:
         t1 = time.process_time()
         pais = input("Ingrese el pais que desea consultar: ")
-        imprimir=controller.video_trending(catalog,pais)
+        print("La información del video tendencia para ese pais es:")
+        print(controller.video_trending(catalog,pais))
         print("Se ejecutó el requerimiento 2")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
-        print("el titulo del video que más días ha sido trending para {0} fue {1} y su su canal fue {2} con el total de {3} dias ".format(pais,imprimir[0],imprimir[1],imprimir[3]))
+        #print("el titulo del video que más días ha sido trending para {0} fue {1} y su su canal fue {2} con el total de {3} dias ".format(pais,imprimir[0],imprimir[1],imprimir[3]))
 
 
     elif int(inputs[0]) == 5:
         t1 = time.process_time()
+        pais = input("Ingrese el pais que desea consultar: ")
+        categoria = input("Ingrese la categoria que desea consultar: ")
+        numero = int(input("Ingrese el numero de videos que desea visualizar:"))
+        print(controller.videos_categoria_pais(catalog, categoria, pais, numero))
         print("Se ejecutó el requerimiento 3")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 6:
         t1 = time.process_time()
+        pais = input("Ingrese el pais que desea consultar: ")
+        tag = input("Ingrese el tag que desea consultar: ")
+        numero = int(input("Ingrese el numero de videos que desea visualizar:"))
+        print(controller.videos_likes(pais, tag, numero))
         print("Se ejecutó el requerimiento 4")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")

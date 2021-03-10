@@ -64,13 +64,17 @@ def funcion_lista(lista):
     return x
 
 # Funcion requerimiento 1
-def videos_categoria_pais(lista, catalog, categoria, pais, numero):
-    return model.videos_categoria_pais(lista, catalog, categoria, pais, numero)
+def videos_categoria_pais(catalog, categoria, pais, numero):
+    return model.videos_categoria_pais(catalog, categoria, pais, numero)
 
 #funcion requerimiento 2
-def video_trending(lista,pais):
-    return model.video_trending_countrie(lista,pais)
+def video_trending(catalog,pais):
+    return model.video_tendencia_pais(catalog,pais)
 
 #funcion requerimiento 3
-def video_categoria(lista,categoria,lista_categoria):
-    return model.video_trending_categorie(lista,categoria,lista_categoria)
+def video_categoria(catalog,categoria):
+    return model.video_tendencia_categoria(catalog,categoria)
+
+#funcion requerimiento 4
+def videos_likes(pais, tag, numero):
+    return model.videos_likes(pais, tag, numero)
