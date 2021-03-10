@@ -77,9 +77,11 @@ def tipo_de_lista(lista):
 # Funciones utilizadas para comparar elementos dentro de una lista
 def cmpfunction(video1, video2):
     if int(video1["views"]) > int(video2["views"]):
-        x=True
+        x=1
+    elif int(video1["views"])<int(video1["views"]):
+        x=-1
     else:
-        x=False
+        x=0
     return x
 
 def comparevideosid(video1,video2):
@@ -154,7 +156,8 @@ def video_tendencia_categoria(catalog, categoria):
             entregar=categoria_p1[h]
             break
 
-    g=(entregar["title"],entregar["channel_title"],entregar["category_id"],mayor)
+    g={"title": entregar["title"],"channel_title":entregar["channel_title"],
+        "category_id":entregar["category_id"],"dias_tendencia":mayor}
 
     return g
 
@@ -190,22 +193,19 @@ def videos_categoria_pais(catalog, categoria, pais, numero):
     videos = catalog["videos"]
     categoria = categorias(catalog,categoria)
     sortVideos(videos, "None", 4, cmpfunction)
-    quitar_llaves = ["tags","comment_count","thumbnail_link","comments_disabled","ratings_disabled",\
-                    "video_error_or_removed","description"]
-
     lista_videos = lt.newList(datastructure='ARRAY_LIST')
 
     for i in range(lt.size(videos)):
         video = lt.getElement(videos, i)
-        for llave in quitar_llaves:
-            del video[llave]  
         if video["category_id"] == categoria:
             if video["country"] == pais:
-                del video["category_id"]
-                del video["country"]
-                lt.addLast(video)
+                while numero > 0:
+                    vid_t = {"Nombre del video": video["title"], "Trending date": video["trending_date"],
+                        "Nombre del canal": video["channel_title"], "Fecha Publicación": video["publish_time"],
+                        "Reproducciones": video["views"], "Likes": video["likes"], "Dislikes": video["dislikes"]}
+                    lt.addLast(lista_videos, vid_t)
+                    numero-=1
 
-    lista_videos = lt.sub_list(lista_videos, 0, numero)
     return lista_videos
 
 def videos_likes(pais, tag, numero):
