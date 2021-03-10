@@ -65,8 +65,6 @@ while True:
         print("Videos cargados: " + str(lt.size(catalog['videos'])))
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str((t2-t1)*1000) + " milisegundos")
-        print(lt.firstElement(catalog["videos"]))
-        print(lt.firstElement(catalog["categorias"]))
 
     elif int(inputs[0]) == 2:
         t1 = time.process_time()
