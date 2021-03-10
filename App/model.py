@@ -189,10 +189,8 @@ def video_tendencia_pais(catalog, pais):
             mas_dias = tendencia_videos[i]
             video = videos_pais[i]
 
-    v_tp = {"Nombre video":video["title"],"Nombre canal":video["channel_title"],
-             "Pais": pais, "Dias Tendencia": mas_dias}
-
-    return v_tp
+    video["Dias Tendencia"] = mas_dias
+    return video
 
 #funcion requerimiento 3
 def video_tendencia_categoria(catalog, categoria):

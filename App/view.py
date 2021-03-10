@@ -97,8 +97,11 @@ while True:
     elif int(inputs[0]) == 4:
         t1 = time.process_time()
         pais = input("Ingrese el pais que desea consultar: ")
-        print("El video con mas dias como tendendia en " + pais + " es:")
-        print(controller.video_trending(catalog,pais))
+        video = controller.video_trending(catalog,pais)
+        nombre = video["title"]
+        canal = video["channel_title"]
+        dias = video["Dias Tendencia"]
+        print(("El titulo del video con mas dias como tendendia en {0} es {1} el nombre del canal es {2} y fue tendencia por {3} dias.").format(pais, nombre, canal, dias))
         print("Se ejecutó el requerimiento 2")
         t2 = time.process_time()
         print("El tiempo de ejecución fue de " + str(t2-t1) + " segundos")
@@ -117,7 +120,7 @@ while True:
         pais = input("Ingrese el pais que desea consultar: ")
         tag = input("Ingrese el tag que desea consultar: ")
         numero = int(input("Ingrese el numero de videos que desea visualizar:"))
-        print("El video con mas likes para " + pais + " con el tag " + tag + " es:")
+        print("Los videos con mas likes para " + pais + " con el tag " + tag + " son:")
         print(controller.videos_likes(catalog, pais, tag, numero))
         print("Se ejecutó el requerimiento 4")
         t2 = time.process_time()
