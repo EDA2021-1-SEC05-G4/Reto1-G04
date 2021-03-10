@@ -68,7 +68,7 @@ def videos_categoria_pais(catalog, categoria, pais, numero):
 
 #funcion requerimiento 2
 def video_trending(catalog,pais):
-    return model.video_tendencia_pais3(catalog,pais)
+    return model.video_tendencia_pais(catalog,pais)
 
 #funcion requerimiento 3
 def video_categoria(catalog,categoria):
@@ -76,4 +76,4 @@ def video_categoria(catalog,categoria):
 
 #funcion requerimiento 4
 def videos_likes(catalog, pais, tag, numero):
-    return model.videos_likes2(catalog, pais, tag, numero)
+    return model.videos_likes(catalog, pais, tag, numero)
