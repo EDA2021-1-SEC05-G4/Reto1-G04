@@ -127,7 +127,6 @@ def sortVideos(catalog, size, tipo, cmpfunction):
     else:
         sub_list = catalog
     sub_list = sub_list.copy()
-    start_time = time.process_time()
     if tipo == 1:
         sorted_list = se.selection_sort(sub_list, cmpfunction)
     elif tipo == 2:
@@ -138,17 +137,14 @@ def sortVideos(catalog, size, tipo, cmpfunction):
         sorted_list = qu.sort(sub_list, cmpfunction)
     elif tipo == 5:
         sorted_list = me.mergesort(sub_list, cmpfunction)
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, sorted_list
+    return  sorted_list
 
 # Funciones requerimientos
 
 #funcion requerimiento 1
 def videos_categoria_pais(catalog, categoria, pais, numero):
-    videos = catalog["videos"]
+    videos = sortVideos(catalog["videos"], "None", 4, cmpfunction)
     categoria = categorias(catalog,categoria)
-    sortVideos(videos, "None", 4, cmpfunction)
     lista_videos = lt.newList(datastructure='ARRAY_LIST')
 
     for i in range(lt.size(videos)):
@@ -167,9 +163,41 @@ def videos_categoria_pais(catalog, categoria, pais, numero):
     return lista_videos
 
 #funcion requerimiento 2
-def video_tendencia_pais(catalog, pais):
-    videos = catalog["videos"]
-    sortVideos(videos, "None", 5, cmpfunction)
+def video_tendencia_pais3(catalog, pais):
+    videos_pais = {}
+    tendencia_videos = {}
+    for i in range(lt.size(catalog["videos"])):   
+        video = lt.getElement(catalog["videos"], i)
+        if video["country"].lower() == pais.lower():
+            if video["video_id"] in tendencia_videos:
+                tendencia_videos[video["video_id"]] = tendencia_videos[video["video_id"]] + 1
+            else:
+                tendencia_videos[video["video_id"]] = 1
+                videos_pais[video["video_id"]]= video
+
+    mas_videos = lt.newList()
+    mas_dias = 0
+    for i in tendencia_videos:
+        if tendencia_videos[i] > mas_dias:
+            mas_dias = tendencia_videos[i]
+            mas_videos = lt.newList()
+            lt.addLast(mas_videos, videos_pais[i])
+        elif tendencia_videos[i] == mas_dias:
+            lt.addLast(mas_videos, videos_pais[i])
+
+    mas_views = 0
+    video_tp = {}
+    for e in range(lt.size(mas_videos)):
+        video = lt.getElement(mas_videos, e)
+        if int(video["views"]) > mas_views:
+            video_tp = video
+
+    v_tp = {"Nombre video":video_tp["title"],"Nombre canal":video_tp["channel_title"],
+             "Pais": pais, "Dias Tendencia": mas_dias}
+
+    return v_tp
+def video_tendencia_pais2(catalog, pais):
+    videos = sortVideos(catalog["videos"], "None", 4, cmpfunction)
 
     videos_pais = {}
     tendencia_videos = {}
@@ -182,20 +210,25 @@ def video_tendencia_pais(catalog, pais):
                 tendencia_videos[video["video_id"]] = 1
                 videos_pais[video["video_id"]]= video
 
-    idvideo_tendencia = ""
+    mas_videos = lt.newList()
     mas_dias = 0
     for i in tendencia_videos:
         if tendencia_videos[i] > mas_dias:
             mas_dias = tendencia_videos[i]
-            idvideo_tendencia = i
+            mas_videos = lt.newList()
+            lt.addLast(mas_videos, videos_pais[i])
+        elif tendencia_videos[i] == mas_dias:
+            lt.addLast(mas_videos, videos_pais[i])
 
-    video_tp = videos_pais[idvideo_tendencia]
+    videos = sortVideos(mas_videos, "None", 4, cmpfunction)
+
+    video_tp = lt.getElement(videos, 0)
     v_tp = {"Nombre video":video_tp["title"],"Nombre canal":video_tp["channel_title"],
              "Pais": pais, "Dias Tendencia": mas_dias}
 
     return v_tp
 
-def video_tendencia_pais2(catalog, pais):
+def video_tendencia_pais(catalog, pais):
     pais = pais.lower()
     videos = catalog["videos"]
 
@@ -207,7 +240,7 @@ def video_tendencia_pais2(catalog, pais):
             video["Dias Tendencia"] = 0
             lt.addLast(videos_pais, video)
 
-    sortVideos(videos_pais, "None", 5, comparetitle)
+    videos_pais = sortVideos(videos_pais, "None", 4, comparetitle)
 
     pos_actual = 0
     pos_sig = 0
@@ -220,7 +253,7 @@ def video_tendencia_pais2(catalog, pais):
         if pos_actual == pos_sig:
             igual = True
         video = lt.getElement(videos_pais, pos_actual)
-        while igual:
+        while igual and (pos_sig < lt.size(videos_pais)):
             video_sig = lt.getElement(videos_pais, pos_sig)
             if video["title"] == video_sig["title"]:
                 contador+=1
@@ -229,7 +262,7 @@ def video_tendencia_pais2(catalog, pais):
                 video["Dias Tendencia"] = contador
                 igual = False
 
-    sortVideos(videos_pais, "None", 5, comparetendency)
+    videos_pais = sortVideos(videos_pais, "None", 4, comparetendency)
 
     video = lt.firstElement(videos_pais)
     vid = { "Nombre del video": video["title"],"Nombre del canal": video["channel_title"],
@@ -271,8 +304,7 @@ def video_tendencia_categoria(catalog, categoria):
 
 #funcion requerimiento 4
 def videos_likes(catalog, pais, tag, numero):
-    videos = catalog["videos"]
-    sortVideos(videos, "None", 5, comparelikes)    
+    videos = sortVideos(catalog["videos"], "None", 4, comparelikes)     
     lista_videos = lt.newList(datastructure='ARRAY_LIST')
 
     c = True
