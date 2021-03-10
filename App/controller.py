@@ -40,13 +40,12 @@ def cargarinfocatalogo(catalog):
     cargarcategorias(catalog)
 
 def cargardatos(catalog):
-    vfile = cf.data_dir + 'videos/videos-30pct.csv'
+    vfile = cf.data_dir + 'videos/videos-5pct.csv'
     input_file = csv.DictReader(open(vfile, encoding='utf-8'))
     for video in input_file:
+        tags = video["tags"].split("|")
+        video["tags"] = tags
         model.addvideo(catalog, video)
-        dic = {"title": video["title"],
-                 "tags" : video["tags"].split("|")}
-        model.addtag(catalog, dic)
 
 def cargarcategorias(catalog):
     cfile = cf.data_dir + 'videos/category-id.csv'
@@ -69,7 +68,7 @@ def videos_categoria_pais(catalog, categoria, pais, numero):
 
 #funcion requerimiento 2
 def video_trending(catalog,pais):
-    return model.video_tendencia_pais2(catalog,pais)
+    return model.video_tendencia_pais(catalog,pais)
 
 #funcion requerimiento 3
 def video_categoria(catalog,categoria):

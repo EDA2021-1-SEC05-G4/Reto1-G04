@@ -45,8 +45,7 @@ los mismos.
 # Construccion de modelos
 def initcatalog(tipo):
     a = {"videos": lt.newList(tipo),
-           "categorias": lt.newList(tipo),
-           "tags": lt.newList(tipo)}
+           "categorias": lt.newList(tipo)}
     return a
 
 # Funciones para agregar informacion al catalogo
@@ -55,9 +54,6 @@ def addvideo(catalog, video):
 
 def addcategory(catalog, categoria):
     lt.addLast(catalog["categorias"], categoria)
-
-def addtag(catalog, video):
-    lt.addLast(catalog["tags"], video)
 
 # Funciones para creacion de datos
 def muestra(lista,pos,nume):
@@ -174,7 +170,6 @@ def videos_categoria_pais(catalog, categoria, pais, numero):
 def video_tendencia_pais(catalog, pais):
     videos = catalog["videos"]
     sortVideos(videos, "None", 5, cmpfunction)
-    print(lt.firstElement(videos))
 
     videos_pais = {}
     tendencia_videos = {}
@@ -184,9 +179,8 @@ def video_tendencia_pais(catalog, pais):
             if video["video_id"] in tendencia_videos:
                 tendencia_videos[video["video_id"]] = tendencia_videos[video["video_id"]] + 1
             else:
-                info = {"title":video["title"],"channel_title":video["channel_title"], "country": pais}
                 tendencia_videos[video["video_id"]] = 1
-                videos_pais[video["video_id"]]= info
+                videos_pais[video["video_id"]]= video
 
     idvideo_tendencia = ""
     mas_dias = 0
@@ -196,9 +190,10 @@ def video_tendencia_pais(catalog, pais):
             idvideo_tendencia = i
 
     video_tp = videos_pais[idvideo_tendencia]
-    video_tp["dias_tendencia"] = mas_dias
+    v_tp = {"Nombre video":video_tp["title"],"Nombre canal":video_tp["channel_title"],
+             "Pais": pais, "Dias Tendencia": mas_dias}
 
-    return video_tp
+    return v_tp
 
 def video_tendencia_pais2(catalog, pais):
     pais = pais.lower()
@@ -215,11 +210,16 @@ def video_tendencia_pais2(catalog, pais):
     sortVideos(videos_pais, "None", 5, comparetitle)
 
     pos_actual = 0
-    pos_sig = 1
-    contador = 1
+    pos_sig = 0
+    igual = True
     while pos_sig < lt.size(videos_pais):
+        contador = 1
+        if igual == False:
+            pos_actual = pos_sig
+            pos_sig = pos_actual
+        if pos_actual == pos_sig:
+            igual = True
         video = lt.getElement(videos_pais, pos_actual)
-        igual = True
         while igual:
             video_sig = lt.getElement(videos_pais, pos_sig)
             if video["title"] == video_sig["title"]:
@@ -227,9 +227,6 @@ def video_tendencia_pais2(catalog, pais):
                 pos_sig+= 1
             else:
                 video["Dias Tendencia"] = contador
-                pos_actual = pos_sig
-                pos_sig = pos_actual + 1
-                contador = 1
                 igual = False
 
     sortVideos(videos_pais, "None", 5, comparetendency)
@@ -275,7 +272,6 @@ def video_tendencia_categoria(catalog, categoria):
 #funcion requerimiento 4
 def videos_likes(catalog, pais, tag, numero):
     videos = catalog["videos"]
-    tags = catalog["tags"]
     sortVideos(videos, "None", 5, comparelikes)    
     lista_videos = lt.newList(datastructure='ARRAY_LIST')
 
@@ -284,13 +280,13 @@ def videos_likes(catalog, pais, tag, numero):
         for i in range(lt.size(videos)):
             video = lt.getElement(videos, i)
             if video["country"].lower() == pais.lower():
-                video_tag = tags[video["video_id"]]
-                for e in range(lt.size(video_tag)):
-                    if tag in e:
-                        if numero >= 0:
+                lista_tag = video["tags"]
+                for e in range(len(lista_tag)):
+                    if tag in lista_tag[e]:
+                        if numero > 0:
                             vid_t = {"Nombre del video": video["title"], "Nombre del canal": video["channel_title"],
                             "Fecha Publicación": video["publish_time"],"Reproducciones": video["views"], 
-                            "Likes": video["likes"], "Dislikes": video["dislikes"], "Tags": video_tag}
+                            "Likes": video["likes"], "Dislikes": video["dislikes"], "Tags": lista_tag}
                             lt.addLast(lista_videos, vid_t)
                             numero-=1
                             break
